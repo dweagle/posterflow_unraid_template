@@ -43,7 +43,12 @@
 
   <Config Name="IDarr Path" Target="/idarr" Default=""
           Mode="rw"
-          Description="Optional: for poster makers storage location (e.g. poster folder for sync to gdrive). Configure the path in Idarr after setup."
+          Description="Optional: for poster maker's storage location (e.g. poster folder for sync to gdrive). Configure the path in Idarr after setup."
+          Type="Path" Display="always" Required="false" Mask="false"></Config>
+  
+  <Config Name="PSD Path" Target="/posterPSDs" Default=""
+          Mode="rw"
+          Description="Optional: for poster maker's storage location for PSD files. Configure the path in Maker Tools > TMDB Search settings after setup."
           Type="Path" Display="always" Required="false" Mask="false"></Config>
   
   <!-- Environment Variables -->
