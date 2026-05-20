@@ -6,7 +6,7 @@ Unraid Community Apps templates for my Docker containers.
 
 | App | Description |
 |-----|-------------|
-| [PosterFlow](PosterFlow.xml) | Self-hosted poster management system for movie/TV show posters |
+| [PosterFlow](templates/PosterFlow.xml) | Self-hosted poster management system for movie/TV show posters |
 
 ## Installation
 
