@@ -54,11 +54,11 @@
   <!-- Environment Variables -->
   <Config Name="PUID" Target="PUID" Default="99" Mode=""
           Description="User ID for file ownership"
-          Type="Variable" Display="always" Required="false" Mask="false">1000</Config>
+          Type="Variable" Display="always" Required="false" Mask="false">99</Config>
 
   <Config Name="PGID" Target="PGID" Default="100" Mode=""
           Description="Group ID for file ownership"
-          Type="Variable" Display="always" Required="false" Mask="false">1000</Config>
+          Type="Variable" Display="always" Required="false" Mask="false">100</Config>
 
   <Config Name="TZ" Target="TZ" Default="UTC" Mode=""
           Description="Timezone (e.g. America/New_York)"
