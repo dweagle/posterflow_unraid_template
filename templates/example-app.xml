@@ -1,57 +1,70 @@
 <Container version="2">
-  <!-- Delete this file if your repository does not ship Docker apps. -->
-  <Name>container_name</Name>
-  <Repository>ghcr.io/YOUR_GITHUB_USERNAME/example-app:latest</Repository>
-  <Registry>https://ghcr.io/YOUR_GITHUB_USERNAME/example-app</Registry>
+  <Name>PosterFlow</Name>
+  <Repository>dweagle/posterflow:develop</Repository>
+  <Registry>https://hub.docker.com/r/dweagle/posterflow</Registry>
   <Network>bridge</Network>
-  <MyIP/>
   <Shell>bash</Shell>
   <Privileged>false</Privileged>
-  
-  <!-- NOTE: The port in the entry ALWAYS refers to the container port, not the host port-->
-  <WebUI>http://[IP]:[PORT:8080]</WebUI>
 
-  <!-- Plain text description -->
-  <Overview>Explain what this container does and why users should install it.</Overview>
+  <WebUI>http://[IP]:[PORT:8357]/</WebUI>
 
-  <!-- NOTE: Either Support or Project is REQUIRED -->
-  <!-- Support forum -->
-  <Support>https://forums.unraid.net/topic/YOUR_SUPPORT_TOPIC</Support>
-  
-  <!-- Project page -->
-  <Project>https://github.com/YOUR_GITHUB_USERNAME/YOUR_PLUGIN_REPO</Project>
+  <Overview>
+    PosterFlow is a self-hosted poster management system that syncs and manages movie and TV show posters across Google Drive using rclone. Features include drive syncing from community preset sources (MM2K, CL2K, etc.), automatic poster renaming to match your Plex/Radarr/Sonarr library, border replacement, unmatched asset detection, direct Plex upload, a built-in scheduler, and real-time job progress via WebSockets. Includes a setup wizard on first launch to configure your media server and Google Drive credentials.
+  </Overview>
+  <Project>https://github.com/dweagle/posterflow</Project>
+  <ReadMe>https://raw.githubusercontent.com/dweagle/posterflow/main/README.md</ReadMe>
 
-  <!-- Readme first file -->
-  <ReadMe>https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_PLUGIN_REPO/main/README.md</ReadMe>
+  <Category>MediaApp:Other</Category>
 
-  <!-- Discord invite code -->
-  <Discord>https://discord.gg/YOUR_DISCORD_INVITE_CODE</Discord>
-  
-  <!-- Valid category entries can be generated from the Application Categorizer plugin available in Apps -->
-  <Category>Tools:System</Category>
-  
-  <!-- If this container is beta container, set Beta to true-->
   <Beta>true</Beta>
 
-  <!-- Minimum and maximum Unraid version.-->
-  <MinVer>6.1</MinVer>
-  <MaxVer>7.3</MaxVer>
+  <License>MIT</License>
 
-  <!-- If this container is deprecated for all OS versions, set Deprecated to true -->
-  <Deprecated>true</Deprecated>
+  <!-- Port -->
+  <Config Name="Web UI Port" Target="8000" Default="8357" Mode="tcp"
+          Description="Web UI port for PosterFlow"
+          Type="Port" Display="always" Required="true" Mask="false">8357</Config>
 
-  <!-- If the container is deprecated starting with a specific OS version, set DeprecatedMaxVer to the OS version-->
-  <DeprecatedMaxVer>7.2</DeprecatedMaxVer>
+  <!-- Volumes -->
+  <Config Name="Config Path" Target="/config" Default="/mnt/user/appdata/posterflow"
+          Mode="rw"
+          Description="Stores the database, rclone config, logs, default poster storage, and idarr working directory."
+          Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/posterflow</Config>
 
-  <!-- License of the container-->
-  <License>GPLv2</License>
+  <Config Name="Destination Path" Target="/assets" Default=""
+          Mode="rw"
+          Description="Optional: custom destination/asset storage location (e.g. Kometa assets folder). Configure the path in Settings after setup."
+          Type="Path" Display="always" Required="false" Mask="false"></Config>
 
-  <!-- Screenshots -->
-  <!-- You can add multiple screenshots by adding multiple <Screenshot> tags -->
-  <Screenshot>https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_PLUGIN_REPO/main/screenshot.png</Screenshot>
+  <Config Name="Posters Path" Target="/posters" Default=""
+          Mode="rw"
+          Description="Optional: custom poster storage location. Configure the path in subscribed drives after setup."
+          Type="Path" Display="always" Required="false" Mask="false"></Config>
+
+  <Config Name="IDarr Path" Target="/idarr" Default=""
+          Mode="rw"
+          Description="Optional: for poster makers storage location (e.g. poster folder for sync to gdrive). Configure the path in Idarr after setup."
+          Type="Path" Display="always" Required="false" Mask="false"></Config>
   
-  <!-- Video.  Youtube URLs are highlyrecommended -->
-  <!-- You can add multiple videos by adding multiple <Video> tags -->
-  <Video>https://www.youtube.com/watch?v=YOUR_YOUTUBE_VIDEO_ID</Video>
+  <!-- Environment Variables -->
+  <Config Name="PUID" Target="PUID" Default="99" Mode=""
+          Description="User ID for file ownership"
+          Type="Variable" Display="always" Required="false" Mask="false">1000</Config>
+
+  <Config Name="PGID" Target="PGID" Default="100" Mode=""
+          Description="Group ID for file ownership"
+          Type="Variable" Display="always" Required="false" Mask="false">1000</Config>
+
+  <Config Name="TZ" Target="TZ" Default="UTC" Mode=""
+          Description="Timezone (e.g. America/New_York)"
+          Type="Variable" Display="always" Required="false" Mask="false">UTC</Config>
+
+  <Config Name="DEBUG" Target="DEBUG" Default="false" Mode=""
+          Description="Enable debug logging on startup. Can also be toggled in-app Settings."
+          Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+
+  <Config Name="LOG_LEVEL" Target="LOG_LEVEL" Default="INFO" Mode=""
+          Description="File log verbosity when debug mode is off (DEBUG, INFO, WARNING, ERROR)"
+          Type="Variable" Display="advanced" Required="false" Mask="false">INFO</Config>
 
 </Container>
